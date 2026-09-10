@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuidados | My Baby Diary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="pagina-cuidados">
+    <section class="container-cuidados">
+
+      <header class="cabecalho-cuidados">
+        <img class="logo-canto" src="img/logo.semescrita.png" alt="My Baby Diary">
+
+        <div class="titulo-site">
+          <h1>My Baby<br><span>Diary</span></h1>
+          <p>Cuidar de você é cuidar do seu bebê.</p>
+        </div>
+
+  
+      </header>
+
+      <section class="grade-cuidados">
+        <article class="card-cuidados lembrete-remedios">
+          <div class="topo-card">
+            <div>
+              <h2>Lembrete de medicamentos</h2>
+              <p>Adicione seus medicamentos e marque quando tomar.</p>
+            </div>
+
+            <button class="botao-adicionar" id="abrirFormulario" type="button">+ Adicionar</button>
+          </div>
+
+          <form class="form-remedio" id="formRemedio">
+            <input type="text" id="nomeRemedio" placeholder="Medicamento" required>
+            <input type="text" id="quantidadeRemedio" placeholder="Quantidade" required>
+            <input type="time" id="horarioRemedio" required>
+            <button type="submit">Salvar</button>
+          </form>
+
+          <div class="tabela-remedios">
+            <div class="linha-cabecalho">
+              <span>Medicamento</span>
+              <span>Quantidade</span>
+              <span>Horário</span>
+              <span>Tomado</span>
+            </div>
+
+            <div id="listaMedicamentos"></div>
+          </div>
+
+          <p class="dica-remedio">♡ Dica: marque como tomado após cada dose para não esquecer e evitar tomadas duplicadas.</p>
+        </article>
+<article class="card-cuidados contato-card">
+  <h2>Entre em contato</h2>
+  <p>Estamos aqui para ajudar você! Envie sua dúvida, sugestão ou relato.</p>
+
+  <form id="formContato">
+    <label>E-mail pessoal</label>
+    <input id="emailContato" type="email" placeholder="exemplo@email.com" required>
+
+    <label>Mensagem</label>
+    <textarea id="mensagemContato" maxlength="500" placeholder="Digite sua mensagem aqui..." required></textarea>
+
+    <p id="contadorMensagem">0/500</p>
+
+    <button type="submit">Enviar mensagem</button>
+
+    <p id="avisoContato"></p>
+  </form>
+</article>
+
+        <article class="card-cuidados sexo-bebe">
+          <h2>Sexo do bebê</h2>
+          <p>Algumas dicas populares que podem indicar o sexo do bebê. Lembre-se: não é 100% certo!</p>
+
+          <div class="sexo-opcoes">
+            <div>
+             <img class="imagem-sexo-bebe" src="img/bebe menino.avif" alt="Imagem menino">
+            
+              <h3>Pode ser menino</h3>
+              <p>Barriga mais “pontuda”</p>
+              <p>Enjoos leves</p>
+              <p>Mais disposição</p>
+              <p>Desejo por comidas salgadas</p>
+            </div>
+
+            <div>
+
+                  <img class="imagem-sexo-bebe" src="img/bebe menina.png" alt="Imagem menina">
+              <h3>Pode ser menina</h3>
+              <p>Barriga mais “arredondada”</p>
+              <p>Enjoos fortes</p>
+              <p>Mais sensibilidade</p>
+              <p>Desejo por doces</p>
+            </div>
+          </div>
+
+          <p class="aviso-azul">Importante: essas dicas são baseadas em crenças populares e não substituem exames médicos.</p>
+        </article>
+
+        <article class="card-cuidados adolescencia-card">
+          <h2>Gravidez na adolescência</h2>
+          <p>Você não está sozinha! Informação e apoio fazem toda a diferença.</p>
+
+          <div class="lista-apoio" id="gravidez-adolescencia">
+         <a href="#modal-confianca">Converse com alguém de confiança <span>›</span></a>
+         <a href="#modal-estudos">Continue seus estudos <span>›</span></a>
+         <a href="#modal-saude-adolescencia">Cuide da sua saúde <span>›</span></a>
+        <a href="#modal-informacao-poder">Informação é poder <span>›</span></a>
+        </div>
+
+          <p class="apoio-final">Procure ajuda se sentir medo, tristeza ou insegurança. Você é importante!</p>
+        </article>
+      </section>
+
+      <section class="frase-cuidados">
+        <strong>♡</strong>
+        <p>Cuidar de você é o primeiro passo para cuidar do seu bebê. Use o app todos os dias e tenha uma gestação mais tranquila!</p>
+      </section>
+
+      <div class="modal-card" id="modal-confianca">
+  <div class="modal-card-conteudo">
+    <a class="modal-card-fechar" href="#gravidez-adolescencia">&times;</a>
+
+    <img src="img/conversa.webp" alt="Apoio e confiança">
+
+    <div>
+      <span>Gravidez na adolescência</span>
+      <h2>Converse com alguém de confiança</h2>
+
+      <p><strong>Lorem ipsum:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p><strong>Lorem ipsum:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p><strong>Lorem ipsum:</strong> Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-card" id="modal-estudos">
+  <div class="modal-card-conteudo">
+    <a class="modal-card-fechar" href="#gravidez-adolescencia">&times;</a>
+
+    <img src="img/estudos.webp" alt="Estudos">
+
+    <div>
+      <span>Gravidez na adolescência</span>
+      <h2>Continue seus estudos</h2>
+
+      <p><strong>Lorem ipsum:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p><strong>Lorem ipsum:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p><strong>Lorem ipsum:</strong> Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-card" id="modal-saude-adolescencia">
+  <div class="modal-card-conteudo">
+    <a class="modal-card-fechar" href="#gravidez-adolescencia">&times;</a>
+
+    <img src="img/saude.webp" alt="Saúde na adolescência">
+
+    <div>
+      <span>Gravidez na adolescência</span>
+      <h2>Cuide da sua saúde</h2>
+
+      <p><strong>Lorem ipsum:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p><strong>Lorem ipsum:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p><strong>Lorem ipsum:</strong> Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-card" id="modal-informacao-poder">
+  <div class="modal-card-conteudo">
+    <a class="modal-card-fechar" href="#gravidez-adolescencia">&times;</a>
+
+    <img src="img/informacao2.webp" alt="Informação">
+
+    <div>
+      <span>Gravidez na adolescência</span>
+      <h2>Informação é poder</h2>
+
+      <p><strong>Lorem ipsum:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p><strong>Lorem ipsum:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p><strong>Lorem ipsum:</strong> Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="menu-inferior">
+  <a href="inicio.html" > ⌂ <span>Início</span></a>
+
+  <a href="Partos.html"> ▤ <span>Partos</span></a>
+
+<a href="pressao.html" class="botao-coracao-menu" aria-label="Aparelho de pressão">
+  ♡
+</a>
+
+  <a href="Informacoes.html" class="ativo">  □   <span>Informações</span></a>
+
+  <a href="Perfil.html"> ♙ <span>Perfil</span></a>
+</nav>
+
+    </section>
+  </main>
+<script>
+  const form = document.getElementById("formRemedio");
+  const lista = document.getElementById("listaMedicamentos");
+  const abrirFormulario = document.getElementById("abrirFormulario");
+  const nomeRemedio = document.getElementById("nomeRemedio");
+  const quantidadeRemedio = document.getElementById("quantidadeRemedio");
+  const horarioRemedio = document.getElementById("horarioRemedio");
+
+  let medicamentos = JSON.parse(localStorage.getItem("medicamentos")) || [
+    { nome: "Ácido fólico", quantidade: "1 comprimido", horario: "08:00", tomado: false },
+    { nome: "Ferro", quantidade: "1 comprimido", horario: "12:00", tomado: true },
+    { nome: "Cálcio", quantidade: "1 comprimido", horario: "20:00", tomado: false },
+    { nome: "Vitamina D", quantidade: "1 gota", horario: "08:00", tomado: true }
+  ];
+
+  function salvarMedicamentos() {
+    localStorage.setItem("medicamentos", JSON.stringify(medicamentos));
+  }
+
+  function mostrarMedicamentos() {
+    lista.innerHTML = "";
+
+    medicamentos.forEach((medicamento, index) => {
+      lista.innerHTML += `
+        <div class="linha-remedio">
+          <span>${medicamento.nome}</span>
+          <span>${medicamento.quantidade}</span>
+          <span>${medicamento.horario}</span>
+
+          <label class="check-remedio">
+            <input type="checkbox" ${medicamento.tomado ? "checked" : ""} onchange="marcarTomado(${index})">
+          </label>
+
+          <button class="excluir-remedio" onclick="excluirRemedio(${index})" type="button">
+            ×
+          </button>
+        </div>
+      `;
+    });
+  }
+
+  function marcarTomado(index) {
+    medicamentos[index].tomado = !medicamentos[index].tomado;
+    salvarMedicamentos();
+    mostrarMedicamentos();
+  }
+
+  function excluirRemedio(index) {
+    medicamentos.splice(index, 1);
+    salvarMedicamentos();
+    mostrarMedicamentos();
+  }
+
+  abrirFormulario.addEventListener("click", () => {
+    form.classList.toggle("mostrar-form-remedio");
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    medicamentos.push({
+      nome: nomeRemedio.value,
+      quantidade: quantidadeRemedio.value,
+      horario: horarioRemedio.value,
+      tomado: false
+    });
+
+    salvarMedicamentos();
+    mostrarMedicamentos();
+
+    form.reset();
+    form.classList.remove("mostrar-form-remedio");
+  });
+
+  mostrarMedicamentos();
+
+  const formContato = document.getElementById("formContato");
+  const emailContato = document.getElementById("emailContato");
+  const mensagemContato = document.getElementById("mensagemContato");
+  const contadorMensagem = document.getElementById("contadorMensagem");
+  const avisoContato = document.getElementById("avisoContato");
+
+  mensagemContato.addEventListener("input", () => {
+    contadorMensagem.textContent = mensagemContato.value.length + "/500";
+  });
+
+  formContato.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const emailDaUsuario = emailContato.value;
+    const mensagem = mensagemContato.value;
+
+    if (emailDaUsuario === "" || mensagem === "") {
+      avisoContato.textContent = "Preencha o e-mail e a mensagem.";
+      avisoContato.style.color = "#f06292";
+      return;
+    }
+
+    const emailDoProjeto = "mybabydiary@email.com";
+    const assunto = "Contato pelo My Baby Diary";
+
+    const corpoEmail =
+      "E-mail da usuária: " + emailDaUsuario + "\n\n" +
+      "Mensagem:\n" + mensagem;
+
+    localStorage.setItem("contatoUsuario", JSON.stringify({
+      email: emailDaUsuario,
+      mensagem: mensagem,
+      data: new Date().toLocaleString("pt-BR")
+    }));
+
+    window.location.href =
+      "mailto:" + emailDoProjeto +
+      "?subject=" + encodeURIComponent(assunto) +
+      "&body=" + encodeURIComponent(corpoEmail);
+
+    avisoContato.textContent = "Abrindo seu aplicativo de e-mail...";
+    avisoContato.style.color = "#8f6bdc";
+
+    formContato.reset();
+    contadorMensagem.textContent = "0/500";
+  });
+</script>
+
+</body>
+</html>

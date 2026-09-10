@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil | My Baby Diary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="pagina-perfil">
+    <section class="container-perfil">
+
+      <header class="cabecalho-perfil">
+        <img class="logo-centro" src="img/logo-removebg-preview.png" alt="My Baby Diary">
+
+      </header>
+
+      <section class="topo-perfil">
+        <article class="card-usuario">
+<div class="foto-perfil-area">
+  <img id="fotoPerfil" src="img/foto-perfil.png" alt="Foto de perfil">
+
+  <label class="botao-foto">
+    📷
+  <input id="inputFotoPerfil" type="file" accept="image/*">
+  </label>
+</div>
+
+   <div class="dados-usuario">
+  <h2>Olá, Mamãe! <span>♡</span></h2>
+  <p>Aqui está o seu perfil e seus documentos.</p>
+
+  <label>Nome de usuária</label>
+  <div class="campo-editar">
+   <input id="nomeUsuario" type="text">
+<button id="salvarNome" type="button">✎</button>
+  </div>
+
+  <label>E-mail</label>
+<p id="emailUsuario"></p>
+</div>
+        </article>
+
+        <article class="card-semana-perfil">
+          <div>
+            <span class="icone-coracao">♡</span>
+            <p>Você está fazendo</p>
+            <h2 id="semanasGestacaoPerfil">Carregando...</h2>
+            <p>Continue cuidando de você e do seu bebê com amor.</p>
+          </div>
+
+          <img src="img/foto.gravida.png" alt="Gestante">
+        </article>
+      </section>
+
+      <section class="carteirinha-prenatal">
+        <div class="titulo-carteirinha">
+          <div>
+            <h2>Carteirinha do Pré-natal</h2>
+            <p>Suas informações de pré-natal, sempre com você.</p>
+          </div>
+<div class="acoes-carteirinha">
+  <button class="botao-compartilhar" type="button">
+    Baixar / Compartilhar
+  </button>
+
+  <button class="botao-ver-mais-carteirinha" id="abrirCarteirinhaCompleta" type="button">
+    Ver mais
+  </button>
+</div>
+        </div>
+
+        <div class="dados-carteirinha">
+          <div>
+            <p><strong>Nome completo</strong><br><span id="cardNome">Ana Carolina da Silva</span></p>
+            <p><strong>Data de nascimento</strong><br><span id="cardNascimento">15/03/1995</span></p>
+            <p><strong>Idade</strong><br><span id="cardIdade">29 anos</span></p>
+            <p><strong>Tipo sanguíneo</strong><br><span id="cardSangue">O+</span></p>
+            <p><strong>E-mail</strong><br><span id="cardEmail">anacarolina@email.com</span></p>
+            <p><strong>Telefone</strong><br><span id="cardTelefone">(11) 98765-4321</span></p>
+          </div>
+
+          <div>
+            <p><strong>Data da última menstruação (DUM)</strong><br><span id="cardDum">10/11/2023</span></p>
+            <p><strong>Data provável do parto (DPP)</strong><br><span id="cardDpp">16/08/2024</span></p>
+            <p><strong>Gestações</strong><br><span id="cardGestacoes">1</span></p>
+            <p><strong>Partos</strong><br><span id="cardPartos">0</span></p>
+            <p><strong>Abortos</strong><br><span id="cardAbortos">0</span></p>
+            <p><strong>Alergias</strong><br><span id="cardAlergias">Nenhuma</span></p>
+          </div>
+
+     <div>
+  <p><strong>Altura</strong><br><span id="cardAltura"></span></p>
+  <p><strong>Peso</strong><br><span id="cardPeso"></span></p>
+  <p><strong>Cidade</strong><br><span id="cardCidade"></span></p>
+  <p><strong>Unidade de saúde</strong><br><span id="cardUnidadeSaude"></span></p>
+  <p><strong>Diabetes</strong><br><span id="cardDiabetes"></span></p>
+  <p><strong>Hipertensão</strong><br><span id="cardHipertensao"></span></p>
+</div>
+</div>
+
+      </section>
+
+      <section class="documentos-perfil">
+        <div class="titulo-documentos">
+          <div>
+            <h2>Meus documentos</h2>
+            <p>Organize seus exames, receitas e documentos importantes.</p>
+          </div>
+
+        <button class="botao-criar-pasta" id="criarPasta" type="button">
+  + Criar pasta
+</button>
+        </div>
+
+        <div class="pastas-documentos" id="listaPastas"></div>
+
+        <div class="como-anexar">
+          <h3>Tipos de anexos:</h3>
+          <div>
+            <p>Fotos<br><span>Formatos: JPG, PNG</span></p>
+            <p>PDF<br><span>Formatos: PDF</span></p>
+            <p>Documentos<br><span>Formatos: DOC, DOCX</span></p>
+          </div>
+        </div>
+      </section>
+
+
+  <nav class="menu-inferior">
+  <a href="inicio.html"> ⌂ <span>Início</span></a>
+
+  <a href="Partos.html"> ▤ <span>Partos</span></a>
+
+<a href="pressao.html" class="botao-coracao-menu" aria-label="Aparelho de pressão">
+  ♡
+</a>
+
+  <a href="Informacoes.html">  □   <span>Informações</span></a>
+
+  <a href="Perfil.html"  class="ativo"> ♙ <span>Perfil</span></a>
+</nav>
+
+    </section>
+  </main>
+
+ <script src="JS/perfil.js"></script>
+</body>

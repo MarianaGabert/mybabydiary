@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro | My Baby Diary</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="phone-container cadastro-container">
+      <a class="back-button" href="Login.html" aria-label="Voltar para o login">
+        &#10094;
+      </a>
+
+      <div class="cadastro-header">
+        <img class="cadastro-img" src="img/logo-removebg-preview.png" alt="My Baby Diary">
+
+        <h1>Cadastro</h1>
+        <p>Vamos começar com algumas informações sobre você.</p>
+      </div>
+
+      <form class="cadastro-form" id="formCadastro">
+        <label class="input-group">
+          <span class="icon">♡</span>
+          <input type="text" id="nomeCadastro" placeholder="Nome completo" required>
+        </label>
+
+        <label class="input-group">
+          <span class="icon">▣</span>
+<input type="text" id="dataNascimentoCadastro" placeholder="Data de nascimento" required>
+        </label>
+
+        <label class="input-group">
+          <span class="icon">✉</span>
+<input type="email" id="emailCadastro" placeholder="E-mail" required>
+        </label>
+
+        <label class="input-group">
+          <span class="icon">☎</span>
+       <input type="tel" id="telefoneCadastro" placeholder="Telefone / WhatsApp" required>
+        </label>
+
+        <label class="input-group">
+          <span class="icon">🔒</span>
+<input type="password" id="senhaCadastro" placeholder="Senha" required>
+        </label>
+
+        <label class="input-group">
+          <span class="icon">🔒</span>
+  <input type="password" id="confirmarSenhaCadastro" placeholder="Confirmar senha" required>
+        </label>
+
+        <label class="terms">
+          <input type="checkbox" required>
+          <span>
+            Li e aceito os
+            <a href="#">Termos de Uso</a>
+            e a
+            <a href="#">Política de Privacidade</a>.
+          </span>
+        </label>
+
+        <button class="primary-button cadastro-button" type="submit">
+          Continuar
+        </button>
+
+        <p class="signup-text">
+          Já tem uma conta?
+          <a href="index.html">Entrar</a>
+        </p>
+      </form>
+    </section>
+  </main>
+
+<script src="JS/usuario.js"></script>
+<script src="JS/cadastro.js"></script>
+</body>
+</html>

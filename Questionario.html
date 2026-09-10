@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteirinha Pré-Natal | My Baby Diary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="phone-container questionario-container">
+      <a class="back-button" href="Cadrasto.html" aria-label="Voltar para o cadastro">
+        &#10094;
+      </a>
+
+      <header class="questionario-header">
+        <h1>Informações para sua carteirinha pré-natal</h1>
+        <p>Essas informações nos ajudam a personalizar sua experiência.</p>
+      </header>
+
+      <div class="etapas-progresso">
+        <span class="etapa-bolinha ativa">1</span>
+        <span class="etapa-bolinha">2</span>
+        <span class="etapa-bolinha">3</span>
+        <span class="etapa-bolinha">4</span>
+      </div>
+
+      <form class="questionario-form" id="formQuestionario">
+        <section class="etapa-questionario ativa">
+          <h2>Dados pessoais e gestação</h2>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <label for="tipoSanguineo">1. Qual é o seu tipo sanguíneo?</label>
+              <select id="tipoSanguineo" name="tipo-sanguineo" required>
+                <option value="">Selecione</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="Não sei">Não sei</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <label for="nome">2. Qual é o seu nome?</label>
+              <input class="small-input" type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <label for="dataNascimento">3. Qual é a sua data de nascimento?</label>
+              <input class="small-input campo-data" type="text" id="dataNascimento" name="data-nascimento" placeholder="dd/mm/aaaa" maxlength="10" required>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <label for="altura">4. Qual é a sua altura?</label>
+              <input class="small-input" type="text" id="altura" name="altura" placeholder="Ex: 1,65 m" required>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <label for="peso">5. Qual é o seu peso?</label>
+              <input class="small-input" type="text" id="peso" name="peso" placeholder="Ex: 68 kg" required>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <label for="cidade">6. Qual é a sua cidade?</label>
+              <input class="small-input" type="text" id="cidade" name="cidade" placeholder="Digite sua cidade" required>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <label for="unidadeSaude">7. Qual é o nome da unidade de saúde onde realiza o acompanhamento?</label>
+              <input class="small-input" type="text" id="unidadeSaude" name="unidade-saude" placeholder="Digite o nome da unidade" required>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <label for="dum">8. Qual foi a data da sua última menstruação (DUM)?</label>
+              <input class="small-input campo-data" type="text" id="dum" name="dum" placeholder="dd/mm/aaaa" maxlength="10" required>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <label for="dpp">9. Qual é a data provável do parto (DPP)?</label>
+              <input class="small-input campo-data" type="text" id="dpp" name="dpp" placeholder="dd/mm/aaaa" maxlength="10" required>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <label for="dppUltrassom">10. A data provável do parto foi definida por ultrassonografia?</label>
+              <input class="small-input" type="text" id="dppUltrassom" name="dpp-ultrassom" placeholder="Digite sim, não ou a data do exame" required>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <label for="outrasGestacoes">11. Você já teve outras gestações? Se sim, quantas?</label>
+              <input class="small-input" type="text" id="outrasGestacoes" name="outras-gestacoes" placeholder="Digite sim e quantas, ou não" required>
+            </div>
+          </div>
+        </section>
+
+        <section class="etapa-questionario">
+          <h2>Histórico obstétrico e saúde</h2>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>12. Já teve parto normal?</p>
+              <label class="radio-option"><input type="radio" name="parto-normal" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="parto-normal" value="Sim"> Sim</label>
+              <input class="small-input" type="text" name="parto-normal-quantidade" placeholder="Quantas vezes? (opcional)">
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>13. Já teve cesárea?</p>
+              <label class="radio-option"><input type="radio" name="cesarea" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="cesarea" value="Sim"> Sim</label>
+              <input class="small-input" type="text" name="cesarea-quantidade" placeholder="Quantas vezes? (opcional)">
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>14. Já teve algum aborto?</p>
+              <label class="radio-option"><input type="radio" name="aborto" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="aborto" value="Sim"> Sim</label>
+              <input class="small-input" type="text" name="aborto-quantidade" placeholder="Quantas vezes? (opcional)">
+            </div>
+          </div>
+
+          <div class="question-card card-rose">
+            <div class="question-content">
+              <p>15. Você possui ou já teve hipertensão arterial?</p>
+              <label class="radio-option"><input type="radio" name="hipertensao" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="hipertensao" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-lilac">
+            <div class="question-content">
+              <p>16. Você possui ou já teve diabetes?</p>
+              <label class="radio-option"><input type="radio" name="diabetes" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="diabetes" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>17. Você possui ou já teve alguma cardiopatia?</p>
+              <label class="radio-option"><input type="radio" name="cardiopatia" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="cardiopatia" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>18. Possui anemia?</p>
+              <label class="radio-option"><input type="radio" name="anemia" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="anemia" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>19. Possui alguma outra condição de saúde?</p>
+              <label class="radio-option"><input type="radio" name="outra-condicao" value="Não" required> Não</label>
+              <label class="radio-option"><input type="radio" name="outra-condicao" value="Sim"> Sim</label>
+              <input class="small-input" type="text" name="outra-condicao-detalhes" placeholder="Qual? (opcional)">
+            </div>
+          </div>
+        </section>
+
+        <section class="etapa-questionario">
+          <h2>Exames, vacinas e informações opcionais</h2>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>20. Já realizou exame de glicemia de jejum?</p>
+              <label class="radio-option"><input type="radio" name="glicemia-jejum" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="glicemia-jejum" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>21. Já realizou teste oral de tolerância à glicose?</p>
+              <label class="radio-option"><input type="radio" name="teste-glicose" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="teste-glicose" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>22. Já realizou teste para sífilis?</p>
+              <label class="radio-option"><input type="radio" name="sifilis" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="sifilis" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>23. Já realizou teste para HIV?</p>
+              <label class="radio-option"><input type="radio" name="hiv" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="hiv" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>24. Já realizou exame para hepatite B?</p>
+              <label class="radio-option"><input type="radio" name="hepatite-b" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="hepatite-b" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>25. Já realizou exame para toxoplasmose?</p>
+              <label class="radio-option"><input type="radio" name="toxoplasmose" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="toxoplasmose" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>26. Já realizou hemograma?</p>
+              <label class="radio-option"><input type="radio" name="hemograma" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="hemograma" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>27. Já realizou exame de urina?</p>
+              <label class="radio-option"><input type="radio" name="exame-urina" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="exame-urina" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>28. Já realizou urocultura?</p>
+              <label class="radio-option"><input type="radio" name="urocultura" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="urocultura" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>29. Já realizou ultrassonografia durante a gestação?</p>
+              <label class="radio-option"><input type="radio" name="ultrassonografia" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="ultrassonografia" value="Sim"> Sim</label>
+              <input class="small-input" type="text" name="ultrassonografia-detalhes" placeholder="Quantas vezes? (opcional)">
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <label for="endereco">30. Qual é o seu endereço?</label>
+              <input class="small-input" type="text" id="endereco" name="endereco" placeholder="Digite seu endereço">
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <label for="intercorrencia">31. Teve alguma intercorrência?</label>
+              <input class="small-input" type="text" id="intercorrencia" name="intercorrencia" placeholder="Digite aqui">
+            </div>
+          </div>
+        </section>
+
+        <section class="etapa-questionario">
+          <h2>Hábitos e intercorrências</h2>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>32. Você já teve infecção urinária?</p>
+              <label class="radio-option"><input type="radio" name="infeccao-urinaria" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="infeccao-urinaria" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>33. Já teve duas ou mais cesáreas anteriores?</p>
+              <label class="radio-option"><input type="radio" name="duas-cesareas" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="duas-cesareas" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>34. Possui vacinação contra tétano atualizada?</p>
+              <label class="radio-option"><input type="radio" name="vacina-tetano" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="vacina-tetano" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>35. Recebeu vacina contra hepatite B?</p>
+              <label class="radio-option"><input type="radio" name="vacina-hepatite-b" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="vacina-hepatite-b" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>36. Recebeu vacina contra influenza?</p>
+              <label class="radio-option"><input type="radio" name="vacina-influenza" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="vacina-influenza" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>37. Recebeu vacina dTpa?</p>
+              <label class="radio-option"><input type="radio" name="vacina-dtpa" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="vacina-dtpa" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>38. Você fuma?</p>
+              <label class="radio-option"><input type="radio" name="fuma" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="fuma" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>39. Você consome álcool?</p>
+              <label class="radio-option"><input type="radio" name="alcool" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="alcool" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>40. Faz uso de outras drogas?</p>
+              <label class="radio-option"><input type="radio" name="outras-drogas" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="outras-drogas" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>41. Já sofreu violência doméstica?</p>
+              <label class="radio-option"><input type="radio" name="violencia-domestica" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="violencia-domestica" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-purple">
+            <div class="question-content">
+              <p>42. Já foi hospitalizada durante a gravidez?</p>
+              <label class="radio-option"><input type="radio" name="hospitalizada" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="hospitalizada" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-blue">
+            <div class="question-content">
+              <p>43. Apresentou sangramento durante a gestação?</p>
+              <label class="radio-option"><input type="radio" name="sangramento" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="sangramento" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-yellow">
+            <div class="question-content">
+              <p>44. Teve ameaça de parto prematuro?</p>
+              <label class="radio-option"><input type="radio" name="ameaca-parto-prematuro" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="ameaca-parto-prematuro" value="Sim"> Sim</label>
+            </div>
+          </div>
+
+          <div class="question-card card-pink">
+            <div class="question-content">
+              <p>45. Participou de atividades educativas durante a gestação?</p>
+              <label class="radio-option"><input type="radio" name="atividades-educativas" value="Não"> Não</label>
+              <label class="radio-option"><input type="radio" name="atividades-educativas" value="Sim"> Sim</label>
+            </div>
+          </div>
+        </section>
+
+        <div class="botoes-questionario">
+          <button class="botao-etapa botao-voltar-etapa" type="button" id="btnAnterior">
+            Voltar
+          </button>
+
+          <button class="botao-etapa botao-proxima-etapa" type="button" id="btnProximo">
+            Próximo
+          </button>
+
+          <button class="primary-button botao-finalizar" type="submit" id="btnFinalizar">
+            Finalizar
+          </button>
+        </div>
+      </form>
+
+      <a class="skip-link" href="inicio.html">Pular por enquanto</a>
+    </section>
+  </main>
+
+  <script src="JS/questionario.js"></script>
+</body>
+</html>

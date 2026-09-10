@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medidor de Pressão Bluetooth - Web Bluetooth</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset básico e estilos gerais */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FED4DB 0%, #DFC2F2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .status-area {
+            background: rgb(245 228 255);
+            border: 2px solid #ddc2ef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        #status {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        #deviceName {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .btn-connect {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 25px auto;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #fed7d7 0%, #f07c91 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-connect:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-connect:disabled {
+            background: #e0cbd9;
+            cursor: not-allowed;
+        }
+
+        .measurements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .measurement-card {
+            background: #ebf8ff;
+            border: 2px solid #4299e1;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .measurement-label {
+            font-size: 0.85rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .measurement-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .measurement-unit {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-top: 4px;
+        }
+
+        .history-section {
+            margin-top: 30px;
+        }
+
+        .history-title {
+            font-size: 1.3rem;
+            color: #4a5568;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn-clear {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            color: #e53e3e;
+            background: #fed7d7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-clear:hover {
+            background: #feb2b2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f7fafc;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #edf2f7;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #edf2f7;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #a0aec0;
+        }
+
+        .info-box {
+            background: #fff4f8;
+            border-left: 4px solid #ffacca;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #070101;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-connecting {
+            color: #d69e2e !important;
+        }
+
+        .status-connected {
+            color: #38a169 !important;
+        }
+
+        .status-error {
+            color: #e53e3e !important;
+        }
+
+        .menu-inferior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 -4px 20px rgba(112, 83, 104, 0.08);
+}
+
+.menu-inferior a {
+  width: 120px;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 12px;
+  color: #5b4a70;
+  text-decoration: none;
+  font-size: 28px;
+}
+
+.menu-inferior a span {
+  font-size: 13px;
+}
+
+.menu-inferior .ativo {
+  background: #f2e9ff;
+  color: #7d55d6;
+}
+
+.botao-coracao-menu {
+  width: 72px;
+  height: 72px;
+  margin-top: -28px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5699d, #ff7da8);
+  color: #fff;
+  font-size: 34px;
+  cursor: default;
+  box-shadow: 0 10px 24px rgba(245, 105, 157, 0.35);
+}
+
+.botao-coracao-menu:hover {
+  transform: none;
+}
+    </style> 
+</head>
+<body>
+    <div class="container">
+        <h1>Medidor de Pressão Bluetooth</h1>
+        <p class="subtitle">Compatível com dispositivos BLE como Omron HEM-7144T2</p>
+
+        <!-- Caixa informativa sobre requisitos e formato dos dados -->
+        <div class="info-box">
+            <strong>Como funciona:</strong>
+            Este app usa a Web Bluetooth API para se conectar a um medidor de pressão arterial BLE.
+            Os valores são lidos da característica <strong>0x2A35</strong> (Blood Pressure Measurement)
+            do serviço <strong>0x1810</strong> (Blood Pressure). Os dados são decodificados no
+            formato <strong>SFLOAT</strong> definido pelo Bluetooth SIG.
+        </div>
+
+        <!-- Botão para iniciar a conexão Bluetooth -->
+        <button id="connectBtn" class="btn-connect" onclick="connectBluetooth()">
+            Conectar ao Medidor
+        </button>
+
+        <!-- Área de status da conexão -->
+        <div class="status-area">
+            <div id="status">Aguardando conexão...</div>
+            <div id="deviceName">Nenhum dispositivo conectado</div>
+        </div>
+
+        <!-- Cards de exibição das medições -->
+        <div class="measurements">
+            <div class="measurement-card">
+                <div class="measurement-label">Pressão Sistólica</div>
+                <div class="measurement-value" id="systolic">--</div>
+                <div class="measurement-unit">mmHg</div>
+            </div>
+            <div class="measurement-card">
+                <div class="measurement-label">Pressão Diastólica</div>
+                <div class="measurement-value" id="diastolic">--</div>
+                <div class="measurement-unit">mmHg</div>
+            </div>
+            <div class="measurement-card">
+                <div class="measurement-label">Batimentos Cardíacos</div>
+                <div class="measurement-value" id="pulse">--</div>
+                <div class="measurement-unit">BPM</div>
+            </div>
+        </div>
+
+        <!-- Seção de histórico de medições salvas -->
+        <div class="history-section">
+            <div class="history-title">
+                <span>Últimas Medições</span>
+                <button class="btn-clear" onclick="clearHistory()">Limpar Histórico</button>
+            </div>
+            <div id="historyContainer">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Sistólica (mmHg)</th>
+                            <th>Diastólica (mmHg)</th>
+                            <th>Pulso (BPM)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- As medições serão inseridas aqui via JavaScript -->
+                    </tbody>
+                </table>
+                <div id="emptyState" class="empty-state">
+                    Nenhuma medição salva ainda.
+                </div>
+            </div>
+        </div>
+<nav class="menu-inferior">
+  <a href="inicio.html"> ⌂ <span>Início</span></a>
+
+  <a href="Partos.html"> ▤ <span>Partos</span></a>
+
+<a href="pressao.html" class="botao-coracao-menu" aria-label="Aparelho de pressão">
+  ♡
+</a>
+
+  <a href="Informacoes.html">  □   <span>Informações</span></a>
+
+  <a href="Perfil.html"> ♙ <span>Perfil</span></a>
+</nav>
+
+
+    </div>
+
+    <script>
+        // ============================================================
+        // CONSTANTES BLUETOOTH
+        // ============================================================
+        // Serviço de Pressão Arterial (Blood Pressure Service)
+        const BLOOD_PRESSURE_SERVICE = 'blood_pressure';
+        // Característica de Medição de Pressão Arterial (Blood Pressure Measurement)
+        const BLOOD_PRESSURE_MEASUREMENT_CHAR = 'blood_pressure_measurement';
+        // Chave usada no localStorage para simular um banco de dados local
+        const STORAGE_KEY = 'bluetooth_blood_pressure_measurements';
+
+        // Referências aos elementos da interface
+        const connectBtn = document.getElementById('connectBtn');
+        const statusEl = document.getElementById('status');
+        const deviceNameEl = document.getElementById('deviceName');
+        const systolicEl = document.getElementById('systolic');
+        const diastolicEl = document.getElementById('diastolic');
+        const pulseEl = document.getElementById('pulse');
+        const historyBody = document.getElementById('historyBody');
+        const emptyState = document.getElementById('emptyState');
+        const historyTable = document.getElementById('historyTable');
+
+        let bluetoothDevice = null;
+
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+        // Carrega o histórico ao abrir a página
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHistory();
+        });
+
+        // ============================================================
+        // FUNÇÃO: Conectar ao dispositivo Bluetooth
+        // ============================================================
+        async function connectBluetooth() {
+            // Verifica se o navegador suporta Web Bluetooth
+            if (!navigator.bluetooth) {
+                setStatus('Web Bluetooth API não suportada neste navegador.', 'error');
+                alert('Seu navegador não suporta Web Bluetooth. Use Chrome, Edge ou Opera em desktop/Android.');
+                return;
+            }
+
+            try {
+                setStatus('Solicitando dispositivo...', 'connecting');
+                connectBtn.disabled = true;
+
+                // Solicita ao usuário que selecione um dispositivo Bluetooth LE
+                // que anuncie o serviço de pressão arterial.
+                bluetoothDevice = await navigator.bluetooth.requestDevice({
+                    filters: [
+                        { services: ['blood_pressure'] },
+                        { namePrefix: 'Omron' }
+                    ],
+                    optionalServices: ['blood_pressure']
+                });
+
+                setStatus(`Conectando a ${bluetoothDevice.name || 'Dispositivo'}...`, 'connecting');
+                deviceNameEl.textContent = `Dispositivo: ${bluetoothDevice.name || 'Desconhecido'}`;
+
+                // Conecta ao servidor GATT do dispositivo
+                const server = await bluetoothDevice.gatt.connect();
+
+                // Obtém o serviço de pressão arterial (0x1810)
+                const service = await server.getPrimaryService(BLOOD_PRESSURE_SERVICE);
+
+                // Obtém a característica de medição (0x2A35)
+                const characteristic = await service.getCharacteristic(BLOOD_PRESSURE_MEASUREMENT_CHAR);
+
+                // Inicia as notificações. Quando o medidor finalizar a medição,
+                // ele enviará um pacote de dados que dispara o evento 'characteristicvaluechanged'.
+                await characteristic.startNotifications();
+                characteristic.addEventListener('characteristicvaluechanged', handleMeasurement);
+
+                setStatus('Conectado! Aguardando medição...', 'connected');
+                connectBtn.textContent = 'Conectado';
+
+                // Evento de desconexão
+                bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+
+            } catch (error) {
+                console.error('Erro Bluetooth:', error);
+                setStatus(`Erro: ${error.message}`, 'error');
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Conectar ao Medidor';
+            }
+        }
+
+        // ============================================================
+        // FUNÇÃO: Tratar desconexão
+        // ============================================================
+        function onDisconnected(event) {
+            setStatus('Dispositivo desconectado.', 'error');
+            deviceNameEl.textContent = 'Nenhum dispositivo conectado';
+            connectBtn.disabled = false;
+            connectBtn.textContent = 'Conectar ao Medidor';
+        }
+
+        // ============================================================
+        // FUNÇÃO: Manipular pacote de medição recebido
+        // ============================================================
+        function handleMeasurement(event) {
+            // O valor retornado é um DataView contendo os bytes brutos da característica.
+            const value = event.target.value;
+            const bytes = [];
+            for (let i = 0; i < value.byteLength; i++) {
+                bytes.push(value.getUint8(i));
+            }
+            console.log('Bytes brutos recebidos:', bytes.map(b => b.toString(16).padStart(2, '0')).join(' '));
+
+            // Decodifica o pacote de acordo com o formato Blood Pressure Measurement
+            // Os primeiros bytes representam flags, seguidos pelos valores SFLOAT.
+            const flags = value.getUint8(0);
+            let offset = 1;
+
+            // ============================================================
+            // DECODIFICAÇÃO SFLOAT
+            // ============================================================
+            // O tipo SFLOAT é definido pelo Bluetooth SIG como um valor de 16 bits:
+            // - Bits 0-11: mantissa (valor inteiro com sinal, 12 bits)
+            // - Bits 12-15: expoente (com sinal, 4 bits)
+            //
+            // O valor real é calculado como: valor = mantissa * 10^expoente
+            //
+            // O expoente em 4 bits é interpretado em complemento de 2:
+            //   - Valores 0-7  => expoentes positivos 0 a 7
+            //   - Valores 8-15 => expoentes negativos -8 a -1
+            //
+            // Exemplo prático: se os bytes forem 0x4A 0x01 (little-endian)
+            //   uint16 = 0x014A = 330
+            //   mantissa = 330 & 0x0FFF = 330
+            //   expoente = 330 >> 12 = 0
+            //   valor = 330 * 10^0 = 330
+            //
+            // SFLOAT também pode representar valores especiais:
+            //   - 0x07FE (2046)  = "Número finito positivo mais alto" (não usado)
+            //   - 0x07FF (2047)  = NaN (Not a Number) / inválido
+            //   - 0x0800 (-2048) = NRes (não resolvido)
+            //   - 0x0801 (-2047) = Reservado para uso futuro
+            //   - 0x0802 (-2046) = +Infinito
+            //   - 0x0802 (-2046) = -Infinito
+            // Nesse app, assumimos que o medidor envia valores válidos.
+            // ============================================================
+
+            // Lê um SFLOAT a partir do DataView na posição offset
+            function readSFloat(dataView, position) {
+                const raw = dataView.getUint16(position, true); // little-endian
+                const mantissa = raw & 0x0FFF; // 12 bits menos significativos
+                let exponent = raw >> 12;      // 4 bits mais significativos
+
+                // Converte o expoente de 4 bits para complemento de 2
+                if (exponent >= 8) {
+                    exponent -= 16;
+                }
+
+                // Verifica se a mantissa também é negativa (12 bits em complemento de 2)
+                let signedMantissa = mantissa;
+                if (mantissa >= 0x0800) {
+                    signedMantissa = mantissa - 0x1000;
+                }
+
+                return signedMantissa * Math.pow(10, exponent);
+            }
+
+            // Pressão Sistólica (obrigatória no pacote) - primeiro SFLOAT
+            const systolic = readSFloat(value, offset);
+            offset += 2;
+
+            // Pressão Diastólica (obrigatória) - segundo SFLOAT
+            const diastolic = readSFloat(value, offset);
+            offset += 2;
+
+            // Mean Arterial Pressure (MAP) - terceiro SFLOAT, obrigatório no padrão
+            const map = readSFloat(value, offset);
+            offset += 2;
+
+            // Data/Hora da medição (se a flag correspondente estiver ativa)
+            // Bit 1 da flag: presence of timestamp
+            let measurementDate = new Date();
+            if (flags & 0x02) {
+                const year = value.getUint16(offset, true);
+                offset += 2;
+                const month = value.getUint8(offset++) - 1; // JavaScript: 0-11
+                const day = value.getUint8(offset++);
+                const hours = value.getUint8(offset++);
+                const minutes = value.getUint8(offset++);
+                const seconds = value.getUint8(offset++);
+                measurementDate = new Date(year, month, day, hours, minutes, seconds);
+            }
+
+            // Pulso (Heart Rate) - presente se o bit 2 da flag estiver ativo
+            let pulse = null;
+            if (flags & 0x04) {
+                pulse = readSFloat(value, offset);
+                offset += 2;
+            }
+
+            // ============================================================
+            // ATUALIZA INTERFACE
+            // ============================================================
+            systolicEl.textContent = Math.round(systolic);
+            diastolicEl.textContent = Math.round(diastolic);
+            pulseEl.textContent = pulse !== null ? Math.round(pulse) : '--';
+
+            setStatus('Medição recebida com sucesso!', 'connected');
+
+            // Salva a medição no localStorage
+            saveMeasurement({
+                date: measurementDate.toISOString(),
+                systolic: Math.round(systolic),
+                diastolic: Math.round(diastolic),
+                pulse: pulse !== null ? Math.round(pulse) : null
+            });
+
+            // Atualiza a tabela de histórico
+            renderHistory();
+        }
+
+        // ============================================================
+        // FUNÇÃO: Salvar medição no localStorage
+        // ============================================================
+        function saveMeasurement(measurement) {
+            // Recupera o histórico atual ou inicia um array vazio
+            let history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+            // Adiciona a nova medição no início do array
+            history.unshift(measurement);
+
+            // Mantém apenas as últimas 50 medições para não ocupar muito espaço
+            if (history.length > 50) {
+                history = history.slice(0, 50);
+            }
+
+            // Salva de volta no localStorage (simulação de banco de dados local)
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+        }
+
+        // ============================================================
+        // FUNÇÃO: Renderizar o histórico de medições na tabela
+        // ============================================================
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+            historyBody.innerHTML = '';
+
+            if (history.length === 0) {
+                historyTable.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            historyTable.style.display = 'table';
+            emptyState.style.display = 'none';
+
+            history.forEach(item => {
+                const row = document.createElement('tr');
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+
+                row.innerHTML = `
+                    <td>${formattedDate}</td>
+                    <td>${item.systolic}</td>
+                    <td>${item.diastolic}</td>
+                    <td>${item.pulse !== null ? item.pulse : '--'}</td>
+                `;
+                historyBody.appendChild(row);
+            });
+        }
+
+        // ============================================================
+        // FUNÇÃO: Limpar todo o histórico do localStorage
+        // ============================================================
+        function clearHistory() {
+            if (confirm('Tem certeza que deseja apagar todo o histórico de medições?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                renderHistory();
+            }
+        }
+
+        // ============================================================
+        // FUNÇÃO: Atualizar texto de status com classe CSS correspondente
+        // ============================================================
+        function setStatus(message, type) {
+            statusEl.textContent = message;
+            statusEl.className = '';
+            if (type === 'connecting') {
+                statusEl.classList.add('status-connecting');
+                statusEl.innerHTML = message + '<span class="spinner"></span>';
+            } else if (type === 'connected') {
+                statusEl.classList.add('status-connected');
+            } else if (type === 'error') {
+                statusEl.classList.add('status-error');
+            }
+        }
+    </script>
+</body>
+</html>
